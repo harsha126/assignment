@@ -1,25 +1,26 @@
 package com.test.assignment.controller;
 
 import com.test.assignment.api.v1.mapper.SupplierMapper;
+import com.test.assignment.api.v1.model.ProductDTO;
 import com.test.assignment.api.v1.model.ProductListDTO;
 import com.test.assignment.api.v1.model.SupplierDTO;
 import com.test.assignment.api.v1.model.SupplierListDTO;
 import com.test.assignment.domain.Supplier;
 import com.test.assignment.services.SupplierService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/api/v1/suppliers/")
 @Slf4j
 public class SupplierController {
@@ -32,36 +33,42 @@ public class SupplierController {
         this.supplierMapper = supplierMapper;
     }
     @GetMapping
-    public ResponseEntity<SupplierListDTO> getAllSuppliers(){
-        return new ResponseEntity<SupplierListDTO>(new SupplierListDTO(supplierService.getAllSuppliers()), HttpStatus.OK);
+    public Page<SupplierDTO> getAllSuppliers(@RequestParam(name = "size",defaultValue = "5") int size,
+                                                           @RequestParam(name = "page",defaultValue = "0") int page){
+        return supplierService.getAllSuppliers(PageRequest.of(page,size));
     }
+
+//    @GetMapping
+//    public Page<SupplierListDTO> getAllSuppliers(@RequestParam(name = "page",defaultValue = "0") int page,
+//                                                 @RequestParam(name = "size",defaultValue = "10") int size){
+//        return new SupplierListDTO(supplierService.getAllSuppliers(page,size, PageRequest.of(page,size)));
+//    }
     @GetMapping({"{name}"})
-    public ResponseEntity<ProductListDTO> getSupplier(@PathVariable String name,
-                                                   @RequestParam(name = "exp",defaultValue = "false") boolean bool){
+    public Page<ProductDTO> getSupplier(@PathVariable String name,
+                                        @RequestParam(name = "exp",defaultValue = "false") boolean bool,
+                                        @RequestParam(name = "size",defaultValue = "5") int size,
+                                        @RequestParam(name = "page",defaultValue = "0") int page){
         System.out.println("------------------runnning =-------------------");
 
-            return new ResponseEntity<ProductListDTO>(new ProductListDTO(supplierService.getAllProducts(name,bool)),HttpStatus.OK);
+            return supplierService.getAllProducts(name,bool,PageRequest.of(page,size));
 
     }
 
     @GetMapping({"{name}/{prod}"})
-    public ResponseEntity<ProductListDTO> getSupplier(@PathVariable String name, @PathVariable String prod){
+    public Page<ProductDTO> getSupplier(@PathVariable String name, @PathVariable String prod,
+                                                      @RequestParam(name = "size",defaultValue = "5") int size,
+                                                      @RequestParam(name = "page",defaultValue = "0") int page){
         try{
             Long al = Long.parseLong(name);
-            return new ResponseEntity<ProductListDTO>(new ProductListDTO(supplierService.getAllProductsBySupplierIdAndProductName(name,prod)),HttpStatus.OK);
+            return supplierService.getAllProductsBySupplierIdAndProductName(name,prod.toUpperCase(),PageRequest.of(page, size));
         }
         catch (Exception e){
             System.out.println("Enter valid id");
         }
-        return new ResponseEntity<ProductListDTO>(new ProductListDTO(supplierService.getAllProductsBySupplierIdAndProductName(name,prod)),HttpStatus.OK);
+        return supplierService.getAllProductsBySupplierNameAndProductName(name,prod.toUpperCase(),PageRequest.of(page,size));
 
     }
-//    @GetMapping({"{id}"})
-//    public ResponseEntity<ProductListDTO> getProducts(@PathVariable Long id, @RequestParam(name = "exp",defaultValue = "false") boolean bool){
-//        log.debug("WENT INTO BOOL CONTROLLER -------------------------------");
-//        System.out.println("WENT INTO BOOL CONTROLLER -------------------------------");
-//        return new ResponseEntity<ProductListDTO>(new ProductListDTO(supplierService.getAllProductsNotExpiredById(id)),HttpStatus.OK);
-//    }
+
 
 
 

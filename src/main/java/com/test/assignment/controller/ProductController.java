@@ -5,15 +5,14 @@ import com.test.assignment.api.v1.model.ProductListDTO;
 import com.test.assignment.services.ProductService;
 import com.test.assignment.services.SupplierService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @Slf4j
 @RequestMapping("/api/v1/products/")
 public class ProductController {
@@ -25,25 +24,36 @@ public class ProductController {
         this.supplierService = supplierService;
     }
     @GetMapping
-    public ResponseEntity<ProductListDTO> getAllProducts(){
-        return new ResponseEntity<ProductListDTO>(new ProductListDTO(productService.getAllProducts()), HttpStatus.OK);
+    public Page<ProductDTO> getAllProducts(@RequestParam(name = "page",defaultValue = "0") int page,
+                                               @RequestParam(name = "size",defaultValue = "5") int size){
+        System.out.println(page);
+        System.out.println(size);
+
+        return productService.getAllProducts(PageRequest.of(page,size));
     }
+
+//    @GetMapping
+//    public ResponseEntity<ProductListDTO> getAllProducts(){
+//        return new ResponseEntity<ProductListDTO>(new ProductListDTO(productService.getAllProducts()), HttpStatus.OK);
+//    }
 
     @GetMapping("{name}")
-    public ResponseEntity<ProductDTO> getProduct(@PathVariable String name){
+    public Page<ProductDTO> getProduct(@PathVariable String name,
+                                       @RequestParam(name = "page",defaultValue = "0") int page,
+                                       @RequestParam(name = "size",defaultValue = "5") int size){
         try{
             Long al = Long.parseLong(name);
-            return new ResponseEntity<ProductDTO>(productService.getProductById(al),HttpStatus.OK);
+            return productService.getProductById(al,PageRequest.of(page, size));
         }
         catch (Exception e){
-            return new ResponseEntity<ProductDTO>(productService.getProductByName(name),HttpStatus.OK);
+            return productService.getProductByName(name,PageRequest.of(page, size));
         }
     }
 
-    @GetMapping({"{id}"})
-    public ResponseEntity<ProductListDTO> getProducts(@PathVariable Long id, @RequestParam(name = "exp",defaultValue = "false") boolean bool){
-        log.debug("WENT INTO BOOL CONTROLLER -------------------------------");
-        System.out.println("WENT INTO BOOL CONTROLLER -------------------------------");
-        return new ResponseEntity<ProductListDTO>(new ProductListDTO(supplierService.getAllProductsNotExpiredById(id)),HttpStatus.OK);
-    }
+//    @GetMapping({"{id}"})
+//    public ResponseEntity<ProductListDTO> getProducts(@PathVariable Long id, @RequestParam(name = "exp",defaultValue = "false") boolean bool){
+//        log.debug("WENT INTO BOOL CONTROLLER -------------------------------");
+//        System.out.println("WENT INTO BOOL CONTROLLER -------------------------------");
+//        return new ResponseEntity<ProductListDTO>(new ProductListDTO(supplierService.getAllProductsNotExpiredById(id)),HttpStatus.OK);
+//    }
 }

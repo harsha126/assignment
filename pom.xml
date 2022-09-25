@@ -17,6 +17,7 @@
         <java.version>18</java.version>
         <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
         <lombok.version>1.18.24</lombok.version>
+        <spring.batch.version>4.3.7</spring.batch.version>
     </properties>
     <dependencies>
         <dependency>

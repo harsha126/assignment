@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Component
+//@Component
 @Slf4j
 public class BootStrap implements CommandLineRunner {
 
