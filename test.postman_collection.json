@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "6b634d8a-7753-480c-b492-b1fb0dac6faf",
+		"name": "test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Of Supplier",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/suppliers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"suppliers",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "23",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supplier With given name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/suppliers/BLUE CROSS LABORATORIES PVT LTHYDERABAD",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"suppliers",
+						"BLUE CROSS LABORATORIES PVT LTHYDERABAD"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supplier With given id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/suppliers/43",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"suppliers",
+						"43"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Of All Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/products/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Products With given id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/products/32",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"32"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Products With given Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/products/ALCIPRO 500MG TAB/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"ALCIPRO 500MG TAB",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Given partial product name and supplier id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/suppliers/56/ba",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"suppliers",
+						"56",
+						"ba"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Given partial product name and supplier Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/suppliers/BLUE CROSS LABORATORIES PVT LTHYDERABAD/ds",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"suppliers",
+						"BLUE CROSS LABORATORIES PVT LTHYDERABAD",
+						"ds"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all non expired products from the given supplier id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/suppliers/34/?exp=true&size=100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"suppliers",
+						"34",
+						""
+					],
+					"query": [
+						{
+							"key": "exp",
+							"value": "true"
+						},
+						{
+							"key": "size",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all non expired products from the given supplier Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/suppliers/GLAXOSMITHKLINE PHARMA LIM   HYDERABADA/?exp=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"suppliers",
+						"GLAXOSMITHKLINE PHARMA LIM   HYDERABADA",
+						""
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "32",
+							"disabled": true
+						},
+						{
+							"key": "exp",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload CSV file",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file.csv",
+							"type": "file",
+							"src": "/C:/Users/ennea/OneDrive/Desktop/sampleinvenrory.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
