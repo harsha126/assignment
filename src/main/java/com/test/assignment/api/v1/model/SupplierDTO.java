@@ -1,6 +1,7 @@
 package com.test.assignment.api.v1.model;
 
-import com.test.assignment.domain.Inventory;
+import com.test.assignment.domain.Batch;
+import com.test.assignment.domain.Product;
 import lombok.*;
 
 import java.util.Set;
@@ -12,6 +13,6 @@ import java.util.Set;
 public class SupplierDTO {
     private Long id;
     private String name;
-    private Set<Inventory> inventories;
+    private Set<Product> products;
     private String inventoryUrl;
 }

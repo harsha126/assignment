@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 public class csvhelper {
     public static String TYPE = "text/csv";
@@ -36,6 +37,11 @@ public class csvhelper {
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 
             for (CSVRecord csvRecord : csvRecords) {
+                    Date date;
+                    if(csvRecord.get("name").isBlank()) continue;
+                    try{date = formatter.parse(csvRecord.get("exp"));}
+                    catch (Exception e){ date = null; }
+
                 Input input = new Input(
                         csvRecord.get("code"),
                         csvRecord.get("name"),
@@ -45,16 +51,18 @@ public class csvhelper {
                         Long.parseLong(csvRecord.get("free")),
                         Float.parseFloat(csvRecord.get("mrp")),
                         Float.parseFloat(csvRecord.get("rate")),
-                        formatter.parse(csvRecord.get("exp")),
+                        csvRecord.get("exp"),
                         csvRecord.get("company"),
                         csvRecord.get("supplier")
                         );
 
+//                System.out.println(input.toString());
                 inputs.add(input);
             }
 
             return inputs;
         } catch (Exception e) {
+            System.out.println("GOT EXCEPTION =-=-=-=-=-=-=-=-==-=-=-=-=-=");
             throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
         }
     }

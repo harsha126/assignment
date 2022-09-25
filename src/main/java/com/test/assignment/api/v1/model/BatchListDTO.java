@@ -8,6 +8,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class InventoryListDTO {
-    List<InventoryDTO> inventoryList;
+public class BatchListDTO {
+    List<BatchDTO> inventoryList;
 }

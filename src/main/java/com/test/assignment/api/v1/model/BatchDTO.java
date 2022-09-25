@@ -1,7 +1,6 @@
 package com.test.assignment.api.v1.model;
 
 import com.test.assignment.domain.Product;
-import com.test.assignment.domain.Supplier;
 import lombok.*;
 
 import java.util.Date;
@@ -11,10 +10,10 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-public class InventoryDTO {
+public class BatchDTO {
     private Long id;
+    private String batchId;
     private Product product;
-    private String batch;
     private Long stock;
     private Long deal;
     private Long free;

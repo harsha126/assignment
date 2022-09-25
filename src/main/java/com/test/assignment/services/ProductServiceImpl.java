@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDTO> getAllProducts() {
         return productRepository.findAll().stream().map(product -> {
             ProductDTO productDTO = productMapper.productToProductDTO(product);
-            productDTO.setSuppliersUrl("/api/v1/products/"+product.getId());
+            productDTO.setBatchUrl("/api/v1/Batches/"+product.getId());
             return productDTO;
         }).collect(Collectors.toList());
     }

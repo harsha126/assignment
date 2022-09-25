@@ -18,8 +18,11 @@ public class Supplier{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @JsonManagedReference
-    @OneToMany(mappedBy = "supplier")
+//    @JsonManagedReference
+    @ManyToMany(targetEntity = Product.class,fetch = FetchType.LAZY)
     @Builder.Default
-    private Set<Inventory> inventories = new HashSet<>();
+    @JoinTable(name = "supplier_product",
+            joinColumns = @JoinColumn(name = "supp_id"),
+            inverseJoinColumns = @JoinColumn(name = "prod_id"))
+    private Set<Product> products = new HashSet<>();
 }

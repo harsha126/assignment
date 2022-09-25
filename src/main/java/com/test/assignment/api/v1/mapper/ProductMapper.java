@@ -12,5 +12,6 @@ public interface ProductMapper {
     @Mapping(source = "code",target = "code")
     @Mapping(source = "company",target = "company")
     @Mapping(source = "name",target = "name")
+    @Mapping(source = "batches",target = "batches")
     ProductDTO productToProductDTO(Product product);
 }

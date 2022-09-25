@@ -11,7 +11,7 @@ public interface SupplierMapper {
     SupplierMapper INSTANCE = Mappers.getMapper(SupplierMapper.class);
     @Mapping(source = "id",target = "id")
     @Mapping(source = "name",target = "name")
-    @Mapping(source = "inventories",target = "inventories")
+    @Mapping(source = "products",target = "products")
     SupplierDTO supplierToSupplierDTO(Supplier supplier);
 
 }
