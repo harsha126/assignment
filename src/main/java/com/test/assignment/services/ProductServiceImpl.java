@@ -8,9 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
@@ -42,14 +39,6 @@ public class ProductServiceImpl implements ProductService {
                 });
     }
 
-//    @Override
-//    public Page<ProductDTO> getAllProducts() {
-//        return productRepository.findAll().stream().map(product -> {
-//            ProductDTO productDTO = productMapper.productToProductDTO(product);
-//            productDTO.setBatchUrl("/api/v1/Batches/"+product.getId());
-//            return productDTO;
-//        }).collect(Collectors.toList());
-//    }
 
     @Override
     public Page<ProductDTO> getAllProducts(Pageable pageable) {

@@ -10,7 +10,6 @@ import java.util.List;
 public interface ProductService {
     Page<ProductDTO> getProductById(Long id,Pageable pageable);
     Page<ProductDTO> getProductByName(String Name,Pageable pageable);
-//    List<ProductDTO> getAllProducts();
 
     Page<ProductDTO> getAllProducts(Pageable pageable);
 }

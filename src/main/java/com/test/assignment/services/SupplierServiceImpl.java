@@ -27,10 +27,6 @@ public class SupplierServiceImpl implements SupplierService {
         this.productMapper = productMapper;
     }
 
-//    @Override
-//    public SupplierDTO getSupplierById(Long id) {
-//        return supplierMapper.supplierToSupplierDTO(supplierRepository.findById(id).get());
-//    }
 
     @Override
     public Page<SupplierDTO> getSupplierById(Long id, Pageable pageable) {

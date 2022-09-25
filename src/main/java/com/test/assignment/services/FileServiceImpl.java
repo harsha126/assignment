@@ -8,27 +8,30 @@ import com.test.assignment.repositories.SupplierRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+
+import static java.nio.file.Files.newOutputStream;
+
 @Service
 public class FileServiceImpl implements FileService {
-    private final ProductRepository productRepository;
-    private final BatchRepository batchRepository;
-    private final SupplierRepository supplierRepository;
-
-//    private csvhelper csvhelper = new csvhelper();
-
-    public FileServiceImpl(ProductRepository productRepository, BatchRepository batchRepository, SupplierRepository supplierRepository) {
-        this.productRepository = productRepository;
-        this.batchRepository = batchRepository;
-        this.supplierRepository = supplierRepository;
-    }
 
     @Override
     public void save(MultipartFile file) throws IOException {
-        List<Input> inputs = csvhelper.csvToInputs(file.getInputStream());
-        System.out.println("--------saving-------------");
-
+//        File csvFile = new File("C:\\Users\\ennea\\OneDrive\\Desktop\\assign\\assignment\\src\\main\\resources\\sampleinvenrory.csv");
+        Path path = Paths.get("C:\\Users\\ennea\\OneDrive\\Desktop\\assign\\assignment\\src\\main\\resources\\sampleinvenrory.csv");
+        try{
+            OutputStream os = Files.newOutputStream(path);
+            os.write(file.getBytes());
+        }
+        catch(Exception e){
+            throw new RuntimeException("Error While File Transfering");
+        }
     }
 
     @Override
